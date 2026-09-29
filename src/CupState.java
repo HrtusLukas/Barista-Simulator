@@ -2,36 +2,61 @@ public class CupState {
     private final CupType cupType;
     private CoffeeBeanType usedBeanType;
     private MilkType usedMilkType;
-    private float cupVolumeML;
+
+    private int addedCoffeeGrams;
+    private int addedWaterML;
+    private int addedMilkML;
+    private boolean isSteamed;
 
     public CupState(CupType cupType) {
         this.cupType = cupType;
-        this.cupVolumeML = 0.0f;
+        this.addedCoffeeGrams = 0;
+        this.addedWaterML = 0;
+        this.addedMilkML = 0;
+        this.isSteamed = false;
     }
 
-    public void AddCoffee(CoffeeBeanType usedBeanType, int waterML) {
-       this.usedBeanType = usedBeanType;
-       this.cupVolumeML += waterML;
+    public void addCoffee(CoffeeBeanType usedBeanType, int coffeeGrams, int waterML) {
+        this.usedBeanType = usedBeanType;
+        this.addedCoffeeGrams += coffeeGrams;
+        this.addedWaterML += waterML;
     }
 
-    public void AddMilk(MilkType usedMilkType, int milkML) {
+    public void addMilk(MilkType usedMilkType, int milkML, boolean isSteamed) {
         this.usedMilkType = usedMilkType;
-        this.cupVolumeML += milkML;
+        this.addedMilkML += milkML;
+        this.isSteamed = isSteamed;
     }
 
     public CupType getCupType() {
-        return this.cupType;
+        return cupType;
     }
 
     public CoffeeBeanType getUsedBeanType() {
-        return this.usedBeanType;
+        return usedBeanType;
     }
 
     public MilkType getUsedMilkType() {
-        return this.usedMilkType;
+        return usedMilkType;
     }
 
-    public float getCupVolumeML() {
-        return this.cupVolumeML;
+    public int getAddedCoffeeGrams() {
+        return addedCoffeeGrams;
+    }
+
+    public int getAddedWaterML() {
+        return addedWaterML;
+    }
+
+    public int getAddedMilkML() {
+        return addedMilkML;
+    }
+
+    public boolean isSteamed() {
+        return isSteamed;
+    }
+
+    public int getTotalVolumeML() {
+        return addedWaterML + addedMilkML;
     }
 }
