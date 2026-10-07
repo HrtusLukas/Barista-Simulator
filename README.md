@@ -9,7 +9,6 @@ An interactive 2D specialty coffee brewing simulation built with **JavaFX**. The
 - **Coffee Selection:** Pick bean types and dosage, which spawns a movable coffee bowl (`CoffeeBowl`).
 - **Grinding Station (`GrinderStation`):** Smooth *Drag-and-Drop* bowl mechanics onto the grinder with time-based grinding.
 - **Portafilter Mechanics (`Portafilter`):** Lock the portafilter into the grinder to collect fresh ground coffee.
-- **Tamping (`Tamper`):** Compress the ground coffee bed prior to extraction.
 - **Espresso Extraction (`EspressoMachine`):**
   - Insert the prepped portafilter and place a coffee cup (`CupState`).
   - Interactive GUI Pop-up menu to specify the exact yield in `ml`.
