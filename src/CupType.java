@@ -1,4 +1,4 @@
 public enum CupType {
     CERAMIC,
-    PAPER
+    PAPER;
 }

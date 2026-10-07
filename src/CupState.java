@@ -1,4 +1,4 @@
-public class CupState {
+public class CupState extends GUIObject{
     private final CupType cupType;
     private CoffeeBeanType usedBeanType;
     private MilkType usedMilkType;
@@ -14,6 +14,23 @@ public class CupState {
         this.addedWaterML = 0;
         this.addedMilkML = 0;
         this.isSteamed = false;
+
+        if (cupType == CupType.PAPER){
+            this.setView("images/paperCup.png");
+            this.setX(60);
+            this.setY(500);
+            this.setHeight(90);
+            this.setWidth(60);
+        } else {
+            this.setView("images/ceramicCup.png");
+            this.setX(140);
+            this.setY(490);
+            this.setHeight(120);
+            this.setWidth(100);
+        }
+
+
+
     }
 
     public void addCoffee(CoffeeBeanType usedBeanType, int coffeeGrams, int waterML) {
