@@ -1,3 +1,6 @@
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 public class GrinderStation extends GUIObject{
     private CoffeeBeanType beans;
     private int grams;
@@ -19,7 +22,14 @@ public class GrinderStation extends GUIObject{
 
     public void grind(Portafilter portafilter) {
         if (portafilter != null & !portafilter.isDirty() & this.beans != null) {
-            portafilter.loadBeans(beans, grams);
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+
+            pause.setOnFinished(e -> {
+                portafilter.loadBeans(beans, grams);
+            });
+
+            pause.play();
+
         }
     }
 

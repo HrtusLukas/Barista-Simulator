@@ -45,15 +45,15 @@ public class EspressoMachine extends GUIObject {
 
     public void brew(int ml) {
         if (this.cup != null && this.insertedFilter != null && this.insertedFilter.getLoadedBean() != null) {
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
 
             pause.setOnFinished(e -> {
-                System.out.println("Ubehlo 5 sekúnd!");
+                System.out.println("Ubehlo 3 sekúnd!");
                 int grams = this.insertedFilter.getCoffeeGrams();
                 this.cup.addCoffee(this.insertedFilter.getLoadedBean(), grams, ml);
                 this.insertedFilter.setDirty(true);
-                this.cup.setX(300);
-                this.cup.setY(500);
+                this.cup.setX(420);
+                this.cup.setY(600);
             });
 
             pause.play();
