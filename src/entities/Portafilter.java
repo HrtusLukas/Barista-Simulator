@@ -1,3 +1,8 @@
+package entities;
+
+import entities.enums.CoffeeBeanType;
+import entities.stations.EspressoMachine;
+import entities.stations.GrinderStation;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 
@@ -24,7 +29,7 @@ public class Portafilter extends GUIObject {
         this.pane = pane;
         instance = this;
 
-        this.setView("images/portafilter.png");
+        this.setView("/images/portafilter.png");
         this.setHeight(125);
         this.setWidth(125);
 
@@ -76,7 +81,7 @@ public class Portafilter extends GUIObject {
         this.tamp();
 
         Platform.runLater(() -> {
-            this.setView("images/portafilterfilled.png");
+            this.setView("/images/portafilterfilled.png");
 
             this.setX(400);
             this.setY(530);

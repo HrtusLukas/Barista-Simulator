@@ -1,3 +1,7 @@
+package entities;
+
+import entities.enums.Recipe;
+
 public class Customer {
     private String name;
     private Recipe coffee;

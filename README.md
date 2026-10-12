@@ -6,11 +6,11 @@ An interactive 2D specialty coffee brewing simulation built with **JavaFX**. The
 
 ## 🎮 Game Mechanics & Features
 
-- **Coffee Selection:** Pick bean types and dosage, which spawns a movable coffee bowl (`CoffeeBowl`).
-- **Grinding Station (`GrinderStation`):** Smooth *Drag-and-Drop* bowl mechanics onto the grinder with time-based grinding.
-- **Portafilter Mechanics (`Portafilter`):** Lock the portafilter into the grinder to collect fresh ground coffee.
-- **Espresso Extraction (`EspressoMachine`):**
-  - Insert the prepped portafilter and place a coffee cup (`CupState`).
+- **Coffee Selection:** Pick bean types and dosage, which spawns a movable coffee bowl (`entities.CoffeeBowl`).
+- **Grinding Station (`entities.stations.GrinderStation`):** Smooth *Drag-and-Drop* bowl mechanics onto the grinder with time-based grinding.
+- **entities.Portafilter Mechanics (`entities.Portafilter`):** Lock the portafilter into the grinder to collect fresh ground coffee.
+- **Espresso Extraction (`entities.stations.EspressoMachine`):**
+  - Insert the prepped portafilter and place a coffee cup (`entities.CupState`).
   - Interactive GUI Pop-up menu to specify the exact yield in `ml`.
   - Asynchronous brewing powered by JavaFX animations (`PauseTransition`) ensuring a smooth, non-freezing UI.
 
@@ -20,7 +20,7 @@ An interactive 2D specialty coffee brewing simulation built with **JavaFX**. The
 
 * **Language:** Java 17+
 * **GUI Framework:** JavaFX / OpenJFX
-* **Architecture:** Object-Oriented Programming (OOP), Custom GUI Wrapper pattern (`GUIObject`), Singleton & Event-Driven Architecture
+* **Architecture:** Object-Oriented Programming (OOP), Custom GUI Wrapper pattern (`entities.GUIObject`), Singleton & Event-Driven Architecture
 * **Build System / IDE:** IntelliJ IDEA, Maven / Gradle
 
 ---

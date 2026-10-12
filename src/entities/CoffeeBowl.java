@@ -1,8 +1,10 @@
-import javafx.scene.Node;
-import javafx.scene.image.ImageView;
+package entities;
+
+import entities.enums.CoffeeBeanType;
+import entities.stations.GrinderStation;
 import javafx.scene.layout.Pane;
 
-public class CoffeeBowl extends GUIObject{
+public class CoffeeBowl extends GUIObject {
     private int grams;
     private CoffeeBeanType type;
     private GrinderStation grinderStation;
@@ -10,7 +12,7 @@ public class CoffeeBowl extends GUIObject{
     public CoffeeBowl(int grams, CoffeeBeanType type, Pane pane) {
         this.grams = grams;
         this.type = type;
-        this.setView("images/coffeeBowl.png");
+        this.setView("/images/coffeeBowl.png");
         this.setX(430);
         this.setY(450);
         this.setHeight(125);

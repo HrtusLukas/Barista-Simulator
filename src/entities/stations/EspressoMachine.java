@@ -1,11 +1,14 @@
+package entities.stations;
+
+import entities.CupState;
+import entities.GUIObject;
+import entities.Portafilter;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -17,21 +20,34 @@ public class EspressoMachine extends GUIObject {
     private CupState cup;
     private static EspressoMachine instance;
 
-    public EspressoMachine() {
-        this.setView("images/machine.png");
+    public EspressoMachine(Pane mainPane) {
+        this.setView("/images/machine.png");
         this.setX(700);
         this.setY(430);
         this.setHeight(325);
         this.setWidth(325);
         instance = this;
 
+        this.getView().setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                Portafilter newPortafilter = new Portafilter(mainPane);
+                if (!mainPane.getChildren().contains(newPortafilter.getView())) {
+                    mainPane.getChildren().add(newPortafilter.getView());
+                }
+                System.out.println("Vytvorený portafilter!");
+            } else if (event.getButton() == MouseButton.PRIMARY) {
+                if (this.insertedFilter != null && this.cup != null) {
+                    this.openEspressoMachineMenu();
+                }
+            }
+        });
     }
 
     public void insertFilter(Portafilter insertedFilter) {
         this.insertedFilter = insertedFilter;
     }
 
-    public void placeCup (CupState cup) {
+    public void placeCup(CupState cup) {
         this.cup = cup;
     }
 
@@ -48,7 +64,7 @@ public class EspressoMachine extends GUIObject {
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
 
             pause.setOnFinished(e -> {
-                System.out.println("Ubehlo 3 sekúnd!");
+                System.out.println("Ubehli 3 sekundy, káva je zaliata!");
                 int grams = this.insertedFilter.getCoffeeGrams();
                 this.cup.addCoffee(this.insertedFilter.getLoadedBean(), grams, ml);
                 this.insertedFilter.setDirty(true);
@@ -57,7 +73,6 @@ public class EspressoMachine extends GUIObject {
             });
 
             pause.play();
-
         }
     }
 
@@ -98,9 +113,7 @@ public class EspressoMachine extends GUIObject {
         x.setOnMouseClicked(e -> pane.getChildren().remove(popup));
         topBar.setRight(x);
 
-
         popup.getChildren().add(topBar);
-
 
         Label mlLabel = new Label("Zadaj objem (ml):");
         popup.getChildren().add(mlLabel);
@@ -123,10 +136,7 @@ public class EspressoMachine extends GUIObject {
             }
         });
 
-
         pane.getChildren().add(popup);
         popup.toFront();
     }
-
-
 }

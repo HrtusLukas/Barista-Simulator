@@ -1,3 +1,7 @@
+package entities.enums;
+
+import entities.CupState;
+import entities.stations.MilkSteamer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,84 +13,99 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public enum CoffeeBeanType {
-    ARABICA("arabica", false, "images/arabica.png"),
-    ROBUSTA("robusta", false, "images/robusta.png"),
-    DECAF("decafeine", true, "images/decaf.png");
+public enum MilkType {
+    COW_MILK("cowMilk", false, "/images/cowMilk.png", 620, 120, 150),
+    OAT_MILK("oatMilk", true, "/images/oatMilk.png", 650, 200, 150),
+    SOY_MILK("soyMilk", true, "/images/soyMilk.png", 770, 100, 150);
 
     private final String name;
-    private final boolean isDecaf;
+    private final boolean isVegan;
     private final String path;
 
-    CoffeeBeanType(String name, boolean isDecaf, String path) {
-        this.name = name;
-        this.isDecaf = isDecaf;
-        this.path = path;
-    }
+    private final double defaultX;
+    private static final double DEFAULT_Y = 140.0;
+    private final double defaultWidth;
+    private final double defaultHeight;
 
-    public boolean isDecaf() {
-        return this.isDecaf;
+    MilkType(String name, boolean isVegan, String path, double defaultX, double defaultWidth, double defaultHeight) {
+        this.name = name;
+        this.isVegan = isVegan;
+        this.path = path;
+        this.defaultX = defaultX;
+        this.defaultWidth = defaultWidth;
+        this.defaultHeight = defaultHeight;
     }
 
     public String getName() {
         return this.name;
     }
 
+    public boolean isVegan() {
+        return this.isVegan;
+    }
+
+    public double getDefaultX() {
+        return this.defaultX;
+    }
+
+    public double getDefaultY() {
+        return DEFAULT_Y;
+    }
+
+    public double getDefaultWidth() {
+        return this.defaultWidth;
+    }
+
+    public double getDefaultHeight() {
+        return this.defaultHeight;
+    }
+
     public ImageView getView() {
         return new ImageView(new Image(getClass().getResourceAsStream(this.path)));
     }
 
-    public void openCoffeeBar(Pane pane) {
+    public void openMilkMenu(Pane pane, boolean napenovac, CupState cupState) {
         VBox popup = new VBox(10);
         popup.setPadding(new Insets(10, 15, 15, 15));
         popup.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;");
         popup.setAlignment(Pos.TOP_CENTER);
 
-
-
         popup.setMinWidth(250);
         popup.setMinHeight(200);
         popup.setLayoutX(200);
         popup.setLayoutY(150);
+
         BorderPane topBar = new BorderPane();
         Label x = new Label("X");
         x.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 2px 6px;");
-
         x.setOnMouseClicked(e -> pane.getChildren().remove(popup));
-
 
         topBar.setRight(x);
 
-        Label gramsLabel = new Label("grams");
-        popup.getChildren().add(gramsLabel);
+        Label gramsLabel = new Label("ml");
         TextField gramsInput = new TextField();
-        popup.getChildren().add(gramsInput);
-
-
-
         Button button = new Button("OK");
-        popup.getChildren().add(button);
+
 
         button.setOnMouseClicked(event -> {
             String text = gramsInput.getText();
             try {
                 int cislo = Integer.parseInt(text);
                 System.out.println("Uložené číslo: " + cislo);
-                CoffeeBowl bowl = new CoffeeBowl(cislo, this, pane);
+                if (napenovac) {
+                    MilkSteamer.getInstance().AddMilk(this ,cislo );
+                } else {
+                    cupState.addMilk(this, cislo, false);
+                }
                 pane.getChildren().remove(popup);
-                pane.getChildren().add(bowl.getView());
             } catch (NumberFormatException e) {
                 System.out.println("Chyba: Zadaný text nie je platné číslo!");
             }
         });
 
-
-
-        popup.getChildren().add(topBar);
-
-
-
+        popup.getChildren().addAll(topBar, gramsLabel, gramsInput, button);
 
         pane.getChildren().add(popup);
+
     }
 }

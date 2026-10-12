@@ -1,8 +1,11 @@
+package entities.ui;
+
+import entities.GUIObject;
+import entities.enums.Recipe;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,15 +13,33 @@ import javafx.scene.layout.VBox;
 public class TicketUI extends GUIObject {
     private final Pane pane;
     private Recipe order;
+    private static TicketUI instance;
 
     public TicketUI(Pane pane, Recipe order) {
         this.pane = pane;
-        this.setView("images/ticket.png");
+        this.setView("/images/ticket.png");
         this.order = order;
         this.setX(20);
         this.setY(655);
         this.setHeight(120);
         this.setWidth(80);
+        instance = this;
+
+        this.getView().setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                this.openTicket();
+                System.out.println("cliked");
+            }
+        });
+    }
+
+    public static TicketUI getInstance() {
+        return instance;
+    }
+
+    public void changeTicket(Recipe recipe) {
+        this.order = recipe;
+        System.out.println(recipe.getDisplayName());
     }
 
     public void openTicket() {

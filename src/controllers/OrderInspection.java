@@ -1,3 +1,8 @@
+package controllers;
+
+import entities.CupState;
+import entities.enums.Recipe;
+
 public class OrderInspection {
 
     private static final int WATER_TOLERANCE_ML = 5;
@@ -31,23 +36,26 @@ public class OrderInspection {
             return false;
         }
 
-        if (order.getRequiredMilkML() > 0) {
-            if (order.getRequiredMilk() != cup.getUsedMilkType()) {
-                System.out.println("❌ FAILED: Zlé mlieko!");
-                return false;
-            }
-            if (order.isRequiresSteamedMilk() != cup.isSteamed()) {
-                System.out.println("❌ FAILED: Mlieko malo/nemalo byť spenené!");
-                return false;
-            }
-        } else {
-            if (cup.getAddedMilkML() > 0) {
-                System.out.println("❌ FAILED: Pridávanie mlieka do kávy bez mlieka!");
-                return false;
+        if (order.getRequiredMilk() != null) {
+            if (order.getRequiredMilkML() > 0) {
+                if (order.getRequiredMilk() != cup.getUsedMilkType()) {
+                    System.out.println("❌ FAILED: Zlé mlieko!");
+                    return false;
+                }
+                if (order.isRequiresSteamedMilk() != cup.isSteamed()) {
+                    System.out.println("❌ FAILED: Mlieko malo/nemalo byť spenené!");
+                    return false;
+                }
+            } else {
+                if (cup.getAddedMilkML() > 0) {
+                    System.out.println("❌ FAILED: Pridávanie mlieka do kávy bez mlieka!");
+                    return false;
+                }
             }
         }
 
         System.out.println("✅ PASSED: Káva je v poriadku!");
+        OrderManager.getInstance().newOrder();
         return true;
     }
 }

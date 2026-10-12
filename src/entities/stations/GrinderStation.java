@@ -1,13 +1,18 @@
+package entities.stations;
+
+import entities.GUIObject;
+import entities.Portafilter;
+import entities.enums.CoffeeBeanType;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-public class GrinderStation extends GUIObject{
+public class GrinderStation extends GUIObject {
     private CoffeeBeanType beans;
     private int grams;
     private static GrinderStation instance;
 
     public GrinderStation() {
-        this.setView("images/grinder.png");
+        this.setView("/images/grinder.png");
         this.setX(180);
         this.setY(430);
         this.setHeight(225);

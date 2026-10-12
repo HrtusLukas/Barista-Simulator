@@ -1,3 +1,5 @@
+package entities.enums;
+
 public enum Recipe {
 
     // Názov, Bean, Milk, Cup, MilkML, WaterML, CoffeeGrams, NeedsSteamedMilk, NeedsTamping

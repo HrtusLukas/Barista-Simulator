@@ -1,19 +1,31 @@
+package entities.stations;
+
+import entities.CupState;
+import entities.GUIObject;
+import entities.enums.MilkType;
 import javafx.animation.PauseTransition;
+import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
 
-public class MilkSteamer extends GUIObject{
+public class MilkSteamer extends GUIObject {
     private MilkType milk;
     private int ml;
     private CupState cup;
     private static MilkSteamer instance;
 
     public MilkSteamer() {
-        this.setView("images/steamer.png");
+        this.setView("/images/steamer.png");
         this.setX(450);
         this.setY(430);
         this.setHeight(225);
         this.setWidth(225);
         instance = this;
+
+        this.getView().setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                this.steam();
+            }
+        });
     }
 
     public static MilkSteamer getInstance() {
@@ -43,5 +55,9 @@ public class MilkSteamer extends GUIObject{
 
             pause.play();
         }
+    }
+
+    public CupState getCup() {
+        return this.cup;
     }
 }

@@ -1,4 +1,10 @@
-public class CupState extends GUIObject{
+package entities;
+
+import entities.enums.CoffeeBeanType;
+import entities.enums.CupType;
+import entities.enums.MilkType;
+
+public class CupState extends GUIObject {
     private final CupType cupType;
     private CoffeeBeanType usedBeanType;
     private MilkType usedMilkType;
@@ -16,13 +22,13 @@ public class CupState extends GUIObject{
         this.isSteamed = false;
 
         if (cupType == CupType.PAPER){
-            this.setView("images/paperCup.png");
+            this.setView("/images/paperCup.png");
             this.setX(60);
             this.setY(500);
             this.setHeight(90);
             this.setWidth(60);
         } else {
-            this.setView("images/ceramicCup.png");
+            this.setView("/images/ceramicCup.png");
             this.setX(140);
             this.setY(490);
             this.setHeight(120);
